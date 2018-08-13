@@ -18,9 +18,15 @@ class UsersController extends Controller
         public function show($id)
     {
         $user = User::find($id);
-
-        return view('users.show', [
+        
+        $data = [
             'user' => $user,
-        ]);
+            'microposts' => $microposts,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.show', $data);
     }
+    
 }
